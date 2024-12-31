@@ -16,7 +16,7 @@
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #00b140;
-            color: #333;
+            color: #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -78,13 +78,13 @@
         .offer-card p {
             font-size: 18px;
             margin-bottom: 20px;
-            color: #555;
+            color: #fff;
         }
 
         .offer-card .price {
             font-size: 20px;
             font-weight: bold;
-            color: #ff6347;
+            color: #fff;
             margin-bottom: 20px;
         }
 
@@ -144,22 +144,22 @@
     <div class="container">
         <!-- Offer 1 -->
         <div class="offer-card" id="offer1">
-            <h3>Special Data Offer 1</h3>
-            <p>Get 10GB of data for just $5!</p>
-            <p class="price">$5</p>
+            <h3>Gift yourself</h3>
+            <p>8GB + 400Mins + 1000SMS</p>
+            <p class="price">sh 1000</p>
             <p class="timer" id="timer1">00:10:00</p>
-            <button onclick="buyOffer(1)">Buy</button>
+            <button onclick="enterNumber(1)">Enter number</button>
             <div id="secretCode1" class="secret-code"></div>
             <div id="whatsappLink1" class="whatsapp-link"></div>
         </div>
 
         <!-- Offer 2 -->
         <div class="offer-card" id="offer2">
-            <h3>Special Data Offer 2</h3>
-            <p>Get 20GB of data for just $8!</p>
-            <p class="price">$8</p>
+            <h3>Gift yourself</h3>
+            <p>2GB 24hrs</p>
+            <p class="price">Sh 100</p>
             <p class="timer" id="timer2">00:10:00</p>
-            <button onclick="buyOffer(2)">Buy</button>
+            <button onclick="enterNumber(2)">Enter number</button>
             <div id="secretCode2" class="secret-code"></div>
             <div id="whatsappLink2" class="whatsapp-link"></div>
         </div>
@@ -167,10 +167,10 @@
         <!-- Offer 3 -->
         <div class="offer-card" id="offer3">
             <h3>Special Data Offer 3</h3>
-            <p>Get 30GB of data for just $12!</p>
-            <p class="price">$12</p>
+            <p>70MB 24hrs</p>
+            <p class="price">Sh 10</p>
             <p class="timer" id="timer3">00:10:00</p>
-            <button onclick="buyOffer(3)">Buy</button>
+            <button onclick="enterNumber(3)">Enter number</button>
             <div id="secretCode3" class="secret-code"></div>
             <div id="whatsappLink3" class="whatsapp-link"></div>
         </div>
@@ -206,14 +206,14 @@
         }
 
         // Buy offer button functionality
-        function buyOffer(offerId) {
+        function enterNumber(offerId) {
             // Display the secret code
             const secretCode = `safcom\\19/k`;
             document.getElementById(`secretCode${offerId}`).innerText = `Your secret code: ${secretCode}`;
 
             // Show WhatsApp link with icon
             const whatsappLink = document.createElement("a");
-            whatsappLink.href = `https://wa.me/0793855917?text=Hi%20I%20would%20like%20to%20buy%20Offer%20${offerId}`;
+            whatsappLink.href = `https://wa.me/+254793855917`;
             whatsappLink.target = "_blank";
 
             const whatsappIcon = document.createElement("img");
@@ -224,9 +224,9 @@
         }
 
         // Start timers for all offers
-        startTimer(1, 600);  // 10 minutes countdown for Offer 1
-        startTimer(2, 600);  // 10 minutes countdown for Offer 2
-        startTimer(3, 600);  // 10 minutes countdown for Offer 3
+        startTimer(1, 0);  // 10 minutes countdown for Offer 1
+        startTimer(2, 2);  // 10 minutes countdown for Offer 2
+        startTimer(3, 50);  // 10 minutes countdown for Offer 3
     </script>
 </body>
 </html>
