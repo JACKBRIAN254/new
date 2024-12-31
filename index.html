@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limited Time Offers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #00b140;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Glowing Text Header */
+        h1 {
+            font-size: 50px;
+            color: #00b140;
+            text-shadow: 0 0 5px #ff6347, 0 0 10px #ff6347, 0 0 15px #ff6347, 0 0 20px #ff6347;
+            animation: glow 1.5s ease-in-out infinite alternate;
+            margin-bottom: 30px;
+        }
+
+        /* Glowing Effect Animation */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #00b140, 0 0 10px #00b140, 0 0 15px #00b140, 0 0 20px #00b140;
+            }
+            100% {
+                text-shadow: 0 0 10px #00b140, 0 0 20px #00b140, 0 0 30px #00b140, 0 0 40px #00b140;
+            }
+        }
+
+        /* Container for Offers */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Style for each offer card */
+        .offer-card {
+            background-color: #29b100;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .offer-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .offer-card p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .offer-card .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff6347;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            font-size: 18px;
+            color: #ff6347;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .offer-card button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .offer-card button:hover {
+            background-color: #45a049;
+        }
+
+        .expired {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .secret-code {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ff6347;
+            font-weight: bold;
+        }
+
+        .whatsapp-link {
+            margin-top: 20px;
+        }
+
+        .whatsapp-link img {
+            width: 50px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .whatsapp-link img:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Glowing Effect -->
+    <h1>Agallo Offers</h1>
+
+    <div class="container">
+        <!-- Offer 1 -->
+        <div class="offer-card" id="offer1">
+            <h3>Special Data Offer 1</h3>
+            <p>Get 10GB of data for just $5!</p>
+            <p class="price">$5</p>
+            <p class="timer" id="timer1">00:10:00</p>
+            <button onclick="buyOffer(1)">Buy</button>
+            <div id="secretCode1" class="secret-code"></div>
+            <div id="whatsappLink1" class="whatsapp-link"></div>
+        </div>
+
+        <!-- Offer 2 -->
+        <div class="offer-card" id="offer2">
+            <h3>Special Data Offer 2</h3>
+            <p>Get 20GB of data for just $8!</p>
+            <p class="price">$8</p>
+            <p class="timer" id="timer2">00:10:00</p>
+            <button onclick="buyOffer(2)">Buy</button>
+            <div id="secretCode2" class="secret-code"></div>
+            <div id="whatsappLink2" class="whatsapp-link"></div>
+        </div>
+
+        <!-- Offer 3 -->
+        <div class="offer-card" id="offer3">
+            <h3>Special Data Offer 3</h3>
+            <p>Get 30GB of data for just $12!</p>
+            <p class="price">$12</p>
+            <p class="timer" id="timer3">00:10:00</p>
+            <button onclick="buyOffer(3)">Buy</button>
+            <div id="secretCode3" class="secret-code"></div>
+            <div id="whatsappLink3" class="whatsapp-link"></div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer Logic
+        function startTimer(offerId, duration) {
+            let timerElement = document.getElementById(`timer${offerId}`);
+            let timeRemaining = duration;
+
+            const interval = setInterval(function() {
+                let hours = Math.floor(timeRemaining / 3600);
+                let minutes = Math.floor((timeRemaining % 3600) / 60);
+                let seconds = timeRemaining % 60;
+
+                // Format time as hh:mm:ss
+                timerElement.innerHTML = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(interval);
+                    timerElement.innerHTML = `<span class="expired">Expired</span>`;
+                    document.getElementById(`offer${offerId}`).querySelector("button").disabled = true;
+                }
+
+                timeRemaining--;
+            }, 1000);
+        }
+
+        // Helper function to pad single digit numbers with leading zeros
+        function pad(num) {
+            return num < 10 ? `0${num}` : num;
+        }
+
+        // Buy offer button functionality
+        function buyOffer(offerId) {
+            // Display the secret code
+            const secretCode = `safcom\\19/k`;
+            document.getElementById(`secretCode${offerId}`).innerText = `Your secret code: ${secretCode}`;
+
+            // Show WhatsApp link with icon
+            const whatsappLink = document.createElement("a");
+            whatsappLink.href = `https://wa.me/0793855917?text=Hi%20I%20would%20like%20to%20buy%20Offer%20${offerId}`;
+            whatsappLink.target = "_blank";
+
+            const whatsappIcon = document.createElement("img");
+            whatsappIcon.src = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
+            whatsappLink.appendChild(whatsappIcon);
+
+            document.getElementById(`whatsappLink${offerId}`).appendChild(whatsappLink);
+        }
+
+        // Start timers for all offers
+        startTimer(1, 600);  // 10 minutes countdown for Offer 1
+        startTimer(2, 600);  // 10 minutes countdown for Offer 2
+        startTimer(3, 600);  // 10 minutes countdown for Offer 3
+    </script>
+</body>
+</html>
